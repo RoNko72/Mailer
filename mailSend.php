@@ -3,19 +3,19 @@
 require 'vendor/autoload.php';
 use Mailgun\Mailgun;
 $domain = "sandbox394f17689b2b43a187f9ac506b00da4b.mailgun.org";
-$mg = Mailgun::create('key-e9b1ec050970877a8118206894b22387');
+$mg = Mailgun::create('key-***');
 
 if (isset($_POST['sendButton'], $_POST['header'], $_POST['to'], $_POST['content'])){
 	$message = $_POST['content'];
 	$to = $_POST['to'];
 	$from = "emailForKursova@ukr.net";
 	$subject = $_POST['header'];
-		
+
 	$mg->messages()->send("$domain", [
 	  'from'    => $from,
 	  'to'      => $to,
 	  'subject' => $subject,
-	  'text'    => $message ]); 
+	  'text'    => $message ]);
 }
 ?>
 
@@ -108,7 +108,7 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['to'], $_POST['content'
 	}
 
 	ul.primary li a:hover {
-	  
+
 	  color: #000;
 	}
 
@@ -125,7 +125,7 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['to'], $_POST['content'
 
 	ul.primary li:hover > a{
 	  color: #000;
-	} 
+	}
 	input[type=text] {
 		border: 3px solid #555;
 		height: 20px;
@@ -179,7 +179,7 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['to'], $_POST['content'
 		<input name="header" type="text" size="25" maxlength="30" value="" /> <br /><br />
 		Повідомленння: <br />
 		<p><textarea name="content" id="contentMessage" cols="91" rows="15"> </textarea></p>
-		
+
 		<div class = "centerLoc">
 		<input type="submit" class = "sendButton" name="sendButton" value="Надіслати"/>
 		</div>

@@ -3,20 +3,20 @@ require 'vendor/autoload.php';
 
 $domain = "sandbox394f17689b2b43a187f9ac506b00da4b.mailgun.org";
 $list = "testList2@sandbox394f17689b2b43a187f9ac506b00da4b.mailgun.org";
-$mg = new Mailgun\Mailgun("key-e9b1ec050970877a8118206894b22387");
+$mg = new Mailgun\Mailgun("key-***");
 $from = "emailForKursova@ukr.net";
 
 if (isset($_POST['emailAdd'], $_POST['nameAdd'])){
 	$emailAdd = $_POST['emailAdd'];
 	$nameAdd = $_POST['nameAdd'];
-	
+
 	$mg->sendMessage($domain , [
 		  'from'    => $from,
-		  'to'      => $emailAdd,  
+		  'to'      => $emailAdd,
 		  'subject' => 'Додавання до списку отримувачів розсилки',
 		  'html'    => "Шановний $nameAdd, <br /><br />Ви були додані до списку отримувачів розсилки $list."
 	]);
-	
+
 	$mg->post("lists/$list/members", array(
     'address'     => $emailAdd,
     'name'        => $nameAdd,
@@ -28,7 +28,7 @@ if (isset($_POST['emailAdd'], $_POST['nameAdd'])){
 
 $result = $mg->get("lists/$list/members", array('subscribed' => 'yes', 'limit' => 100));
 
-function objectToArray($d) 
+function objectToArray($d)
 {
     if (is_object($d)) {
         $d = get_object_vars($d);
@@ -51,11 +51,11 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['content'])){
 	$message = $_POST['content'];
 	$from = "emailForKursova@ukr.net";
 	$subject = $_POST['header'];
-	
+
 	for($i = 0; $i < $Count; $i = $i + 1){
 		$mg->sendMessage($domain , [
 		  'from'    => $from,
-		  'to'      => $mails[$i],  
+		  'to'      => $mails[$i],
 		  'subject' => $subject,
 		  'html'    => "{$message}<br><br><a href=\"%unsubscribe_url%\">Відписатися від розсилки</a>"
 		]);
@@ -153,7 +153,7 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['content'])){
 	}
 
 	ul.primary li a:hover {
-	  
+
 	  color: #000;
 	}
 
@@ -170,7 +170,7 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['content'])){
 
 	ul.primary li:hover > a{
 	  color: #000;
-	} 
+	}
 	.sendButton{
 		background-color: white;
 		border-color: black;
@@ -236,11 +236,11 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['content'])){
 	<div>
 		<form name="f1" method="post">
 			Поштова адреса: <br />
-			<input name="emailAdd" type="text" size="25" maxlength="30" value="" /> 
+			<input name="emailAdd" type="text" size="25" maxlength="30" value="" />
 			<br /><br />
 			Ім'я користувача: <br />
 			<input name="nameAdd" type="text" size="25" maxlength="30" value="" /> <br /><br />
-			
+
 			<div id = "floatR" class = "centerLoc">
 				<input type="submit" class="sendButton" name="sendButton" value="Додати до списку підписників"/><br /><br />
 			</div>
@@ -250,10 +250,10 @@ if (isset($_POST['sendButton'], $_POST['header'], $_POST['content'])){
 	<form name="f2" method="post">
 		Заголовок: <br />
 		<input name="header" type="text" size="25" maxlength="30" value="" /> <br /><br />
-		
-		Повідомленння: 
+
+		Повідомленння:
 		<p><textarea name="content" id="contentMessage" cols="91" rows="15"> </textarea></p>
-		
+
 		<div class = "centerLoc">
 		<input type="submit" class="sendButton" name="sendButton" value="Надіслати"/>
 		</div>

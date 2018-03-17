@@ -3,14 +3,14 @@ require 'vendor/autoload.php';
 use Mailgun\Mailgun;
 
 $domain = "sandbox394f17689b2b43a187f9ac506b00da4b.mailgun.org";
-$mg = new Mailgun('key-e9b1ec050970877a8118206894b22387');
+$mg = new Mailgun('key-***');
 
 $result = $mg->get("$domain/stats/total",[
     'event' => array('accepted', 'delivered', 'failed', 'opened', 'clicked', 'unsubscribed', 'complained', 'stored'),
     'duration' => '1m'
 ]);
 
-function objectToArray($d) 
+function objectToArray($d)
 {
     if (is_object($d)) {
         $d = get_object_vars($d);
@@ -124,7 +124,7 @@ $complainedCount = $newArr["http_response_body"]["stats"][0]["complained"]["tota
 	}
 
 	ul.primary li a:hover {
-	  
+
 	  color: #000;
 	}
 
@@ -141,12 +141,12 @@ $complainedCount = $newArr["http_response_body"]["stats"][0]["complained"]["tota
 
 	ul.primary li:hover > a{
 	  color: #000;
-	} 
+	}
 	#stats{
 		border: 3px solid #303030;
 		padding-left: 40px;
 	}
-	#rightS{ 
+	#rightS{
 		float: right;
 		margin-top: -175px;
 		margin-right: 50px;
